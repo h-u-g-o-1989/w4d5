@@ -40,7 +40,11 @@ const user = {
 
 app.get("/", (req, res) => {
   console.log("GET REQUEST, VISITNG HOME PAGE");
-  res.render("index", { user });
+  Book.find().then((allTheBooks) => {
+    //  console.log("allTheBooks:", allTheBooks);
+
+    res.render("index", { user, books: allTheBooks });
+  });
 });
 
 app.get("/new", (req, res) => {
@@ -49,9 +53,33 @@ app.get("/new", (req, res) => {
   res.render("new");
 });
 
-app.post("/new", (req, res) => {
+app.post("/new-book", (req, res) => {
   console.log("POST REQUEST, TO NEW BOOK");
+  const isAvailable = true;
+  const { author, genre, pages, releaseDate } = req.body;
+  // you would check the property here
+  //   yoiu can check manually if it obeys specific orders
+
   console.log(req.body);
+  Book.create({
+    author,
+    genre,
+    releaseDate,
+    pages,
+    isAvailable,
+  })
+    .then((bookCreated) => {
+      // console.log("bookCreated:", bookCreated);
+      res.redirect("/");
+    })
+    .catch((err) => {
+      console.log("err:", err);
+    });
+});
+
+app.get("/new-book", (req, res) => {
+  console.log(req.query);
+  res.render("index");
 });
 
 // app.delete("/book", (req, res) => {});

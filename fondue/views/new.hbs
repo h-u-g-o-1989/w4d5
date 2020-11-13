@@ -1,6 +1,20 @@
 <h1>HERE IS WHERE WE WILL CREATE A NEW BOOK</h1>
 
-<form action="/new" method="POST">
-   <input name="name" />
+{{!-- title: String,
+  author: String,
+  pages: Number,
+  releaseDate: Date,
+  isAvailable: Boolean,
+  genre: String, --}}
+<form action="/new-book" method="POST">
+   <input name="author" type="text" placeholder="Author name" required />
+   <input type="number" name="pages" placeholder="Amount of pages" required>
+   <input type="date" name="releaseDate" placeholder="When">
+   <input type="text" name="genre" placeholder="What is the genre">
    <button type="submit">Submit</button>
+</form>
+
+<form action="/new-book">
+   <input type="password" name="password" placeholder="Type your password">
+   <button type="submit">SUBMIT YOUR PASSWORD</button>
 </form>
