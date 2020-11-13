@@ -25,6 +25,7 @@ const Book = mongoose.model("Book", bookSchema);
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 app.set("view engine", "hbs");
 
